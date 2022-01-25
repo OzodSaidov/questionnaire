@@ -1,6 +1,19 @@
 from django.db import models
 from config.base_models import BaseModel
-from user.models import Interrogator
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
+
+class Interrogator(BaseModel):
+    """
+    Опросчик
+    """
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    @property
+    def count_questionnaire(self) -> int:
+        return self.questionnaires.filter(is_completed=True).count()
 
 
 class Responder(BaseModel):
@@ -13,7 +26,8 @@ class Responder(BaseModel):
 
 
 class Questionnaire(BaseModel):
-    responder = models.ForeignKey(Responder, on_delete=models.CASCADE, related_name='questionnaires')
+    responder = models.ForeignKey(Responder, on_delete=models.CASCADE, related_name='questionnaires', blank=True,
+                                  null=True)
     interrogator = models.ForeignKey(Interrogator, on_delete=models.CASCADE, related_name='questionnaires')
     questions = models.ManyToManyField('Question')
     is_completed = models.BooleanField(default=False)
