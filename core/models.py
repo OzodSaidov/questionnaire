@@ -35,6 +35,7 @@ class Questionnaire(BaseModel):
 
 
 class Question(BaseModel):
+    """Вопросы для опроса"""
     ANSWER = (
         ('Y', 'Yes'),
         ('N', 'No')
@@ -49,6 +50,7 @@ class Question(BaseModel):
 
 
 class SubQuestion(BaseModel):
+    """Под вопрос"""
     question = models.ForeignKey(Question, on_delete=models.CASCADE, null=True)
     creator = models.ForeignKey(Interrogator, on_delete=models.CASCADE, null=True, blank=True)
     question_text = models.TextField()
@@ -58,6 +60,7 @@ class SubQuestion(BaseModel):
 
 
 class SubQuestionAnswer(BaseModel):
+    """Ответы подвопроса"""
     creator = models.ForeignKey(Interrogator, on_delete=models.CASCADE, null=True, blank=True)
     sub_question = models.ForeignKey(SubQuestion, on_delete=models.CASCADE, related_name='answers')
     answer_text = models.CharField(max_length=255)
@@ -65,6 +68,7 @@ class SubQuestionAnswer(BaseModel):
 
 
 class ResultQuestionnaire(BaseModel):
+    """Результат каждого участника на каждому вопросу"""
     responder = models.ForeignKey(Responder, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     question_answer = models.CharField(max_length=3)
