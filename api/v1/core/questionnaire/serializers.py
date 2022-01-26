@@ -42,6 +42,10 @@ class QuestionnaireFillSerializer(serializers.ModelSerializer):
         )
 
     def to_internal_value(self, data):
+        """
+        1. Здесь будеть создан responder по дата рождения и пола
+        2. Будеть запись в бд ответы на каждому вопросу
+        """
         responder_birth_date = data.pop('birth_date', '')
         responder_gender = data.pop('gender', '')
         questionnaire = data.pop('questionnaire', [])
@@ -55,6 +59,7 @@ class QuestionnaireFillSerializer(serializers.ModelSerializer):
             raise ValidationError({"detail": "Data does not exists"})
         if questionnaire:
             for question in questionnaire:
+                # TODO Надо оптимизировать result data!!!
                 result_data = dict(responder=response['responder'].id, question=question['question']['id'],
                                    question_answer=question['question']['answer'],
                                    sub_question=question['question']['sub_question']['id'],
