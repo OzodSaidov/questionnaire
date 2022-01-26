@@ -5,7 +5,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -81,9 +80,12 @@ class Migration(migrations.Migration):
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('is_completed', models.BooleanField(default=False)),
-                ('interrogator', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='questionnaires', to='core.interrogator')),
+                ('interrogator',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='questionnaires',
+                                   to='core.interrogator')),
                 ('questions', models.ManyToManyField(to='core.Question')),
-                ('responder', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='questionnaires', to='core.responder')),
+                ('responder', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE,
+                                                related_name='questionnaires', to='core.responder')),
             ],
             options={
                 'abstract': False,
