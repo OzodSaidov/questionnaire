@@ -17,6 +17,7 @@ class Interrogator(BaseModel):
 
 
 class Responder(BaseModel):
+    """Участник опроса"""
     GENDER = (
         ('M', 'Male'),
         ('F', 'Female'),
@@ -26,6 +27,7 @@ class Responder(BaseModel):
 
 
 class Questionnaire(BaseModel):
+    """Для каждого участника будет создан новый опрос."""
     responder = models.ForeignKey(Responder, on_delete=models.CASCADE, related_name='questionnaires', blank=True,
                                   null=True)
     interrogator = models.ForeignKey(Interrogator, on_delete=models.CASCADE, related_name='questionnaires', null=True,
