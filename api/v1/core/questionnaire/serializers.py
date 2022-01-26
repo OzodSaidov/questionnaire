@@ -1,10 +1,7 @@
-import json
-
-from django.db.models import F
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
-from core.models import Questionnaire, Question, Responder, ResultQuestionnaire, SubQuestionAnswer
+from core.models import Questionnaire, Responder, ResultQuestionnaire, SubQuestionAnswer
 
 
 class ResponderSerializer(serializers.ModelSerializer):
