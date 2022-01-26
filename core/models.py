@@ -60,7 +60,7 @@ class SubQuestion(BaseModel):
 
 
 class SubQuestionAnswer(BaseModel):
-    """Ответы вторичного вопроса"""
+    """Ответ вторичного вопроса"""
     creator = models.ForeignKey(Interrogator, on_delete=models.CASCADE, null=True, blank=True)
     sub_question = models.ForeignKey(SubQuestion, on_delete=models.CASCADE, related_name='answers')
     answer_text = models.CharField(max_length=255)
