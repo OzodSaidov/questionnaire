@@ -1,0 +1,31 @@
+{
+  "birth_date": 123424,
+  "gender": "M",
+  "interrogator": 2,
+  "questionnaire": [
+    {
+      "question": {
+        "id": 1,
+        "answer": "no",
+        "sub_question": {
+          "id": 1,
+          "answers": []
+        }
+      }
+    },
+    {
+      "question": {
+        "id": 2,
+        "answer": "yes",
+        "sub_question": {
+          "id": 2,
+          "answers": [
+            1,
+            2,
+            3
+          ]
+        }
+      }
+    }
+  ]
+}
