@@ -35,7 +35,7 @@ class Questionnaire(BaseModel):
 
 
 class Question(BaseModel):
-    """Вопросы для опроса"""
+    """Первичный вопрос для опроса"""
     ANSWER = (
         ('Y', 'Yes'),
         ('N', 'No')
@@ -50,7 +50,7 @@ class Question(BaseModel):
 
 
 class SubQuestion(BaseModel):
-    """Под вопрос"""
+    """Вторичный вопрос"""
     question = models.ForeignKey(Question, on_delete=models.CASCADE, null=True)
     creator = models.ForeignKey(Interrogator, on_delete=models.CASCADE, null=True, blank=True)
     question_text = models.TextField()
@@ -60,7 +60,7 @@ class SubQuestion(BaseModel):
 
 
 class SubQuestionAnswer(BaseModel):
-    """Ответы подвопроса"""
+    """Ответы вторичного вопроса"""
     creator = models.ForeignKey(Interrogator, on_delete=models.CASCADE, null=True, blank=True)
     sub_question = models.ForeignKey(SubQuestion, on_delete=models.CASCADE, related_name='answers')
     answer_text = models.CharField(max_length=255)
